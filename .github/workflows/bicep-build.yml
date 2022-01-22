@@ -24,14 +24,8 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Azure CLI script
+    - name: Azure CLI Bicep build
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az account show
           az bicep build --file ./deploy-rg.bicep --stdout
